@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   # Rebuild daily so the repository mosaic stays fresh even without a push.
   schedule:
     - cron: "0 6 * * 1"
@@ -13,9 +15,9 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment.
+# Allow one concurrent deployment per branch/ref.
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -41,11 +43,13 @@ jobs:
         run: bun run build
 
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
