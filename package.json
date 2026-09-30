@@ -9,6 +9,12 @@
   },
   "scripts": {
     "scan": "bun run scripts/scan-repos.ts",
+    "env:restore": "bun run scripts/restore-env.ts",
+    "knowledge:check": "bun run scripts/check-knowledge.ts",
+    "backlog": "backlog",
+    "backlog:board": "backlog board",
+    "backlog:check": "backlog doctor",
+    "backlog:search": "backlog search",
     "tokens": "bun run scripts/gen-tokens.ts",
     "prebuild": "bun run scripts/scan-repos.ts",
     "predev": "bun run scripts/scan-repos.ts",
@@ -32,6 +38,7 @@
     "@sparticuz/chromium": "^153.0.0",
     "@unocss/astro": "^66.10.5",
     "@unocss/preset-wind4": "^66.10.5",
+    "backlog.md": "^1.53.0",
     "puppeteer-core": "^25.12.0",
     "skills": "^1.7.0",
     "unocss": "^66.10.5"

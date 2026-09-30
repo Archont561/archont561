@@ -21,10 +21,14 @@ bun install          # install deps
 bun run dev          # scan repos (predev) then start dev server at http://localhost:4321
 bun run build        # scan repos (prebuild) then build to ./dist
 bun run preview      # preview the production build
-bun run scan         # re-scan GitHub -> src/data/repos.json (+ public/og images)
-bun run tokens       # regenerate src/styles/webcore-tokens.css after upgrading webcoreui
-bun run shots        # capture page screenshots to ./screenshots (auto-starts a dev server)
-bun run skills        # the agent-skills CLI (list | find | add | update)
+bun run scan             # re-scan GitHub -> src/data/repos.json (+ public/og images)
+bun run env:restore      # restore .env from .env.example if it is missing
+bun run knowledge:check  # validate .knowledge documents
+bun run backlog:board    # show the Backlog.md Kanban board
+bun run backlog:check    # validate Backlog.md task IDs and dependencies
+bun run tokens           # regenerate src/styles/webcore-tokens.css after upgrading webcoreui
+bun run shots            # capture page screenshots to ./screenshots (auto-starts a dev server)
+bun run skills           # the agent-skills CLI (list | find | add | update)
 ```
 
 ## Architecture map
@@ -37,6 +41,8 @@ bun run skills        # the agent-skills CLI (list | find | add | update)
 | `src/components/RepoMosaic.astro` | Renders the mosaic from `repos.json` (WebCoreUI + UnoCSS) |
 | `src/components/ThemeProvider.astro` | Override that makes the site default to **dark** |
 | `src/content/docs/` | Starlight pages: `index.mdx` (splash home), `projects/`, `about.md` |
+| `backlog/` | Backlog.md-managed task files; use these for actionable work and `.knowledge/` for durable contracts |
+| `.knowledge/` | Durable contracts and project context referenced by backlog tasks |
 | `src/lib/languageColors.ts` | Linguist-ish language → dot colour map |
 | `astro.config.mjs` | Astro/Starlight/UnoCSS/WebCoreUI wiring, `site`/`base`, sidebar |
 | `uno.config.ts` | UnoCSS presets, theme bridge to Starlight, shortcuts |
