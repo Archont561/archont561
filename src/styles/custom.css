@@ -1,0 +1,23 @@
+/* Small global tweaks. All component styling lives in UnoCSS utility classes. */
+
+:root {
+  --sl-content-width: 50rem;
+}
+
+/* Give the splash homepage room for the full-width mosaic. */
+.mosaic-page main {
+  --sl-content-width: 70rem;
+}
+
+/* Archived/template corner ribbon on mosaic tiles sits above the image. */
+.tile-ribbon {
+  z-index: 2;
+  font-weight: 600;
+}
+
+/* Respect reduced-motion for the mosaic hover transforms. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

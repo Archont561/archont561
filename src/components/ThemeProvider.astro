@@ -1,0 +1,48 @@
+---
+// Override of Starlight's ThemeProvider that defaults to DARK when the visitor
+// has no stored preference (the site's design is dark-oriented). The light/dark/
+// auto toggle still works and is remembered; "auto" follows the system setting.
+import { Icon } from "@astrojs/starlight/components";
+---
+
+{/* This is intentionally inlined to avoid FOUC. */}
+<script is:inline>
+  window.StarlightThemeProvider = (() => {
+    const hasLS = typeof localStorage !== "undefined";
+    // On the very first visit (no stored preference) seed "dark" so the whole
+    // site — including Starlight's ThemeSelect, which otherwise treats an unset
+    // preference as "auto"/system — defaults to dark. The light/dark/auto toggle
+    // still works and is remembered afterwards.
+    if (hasLS && localStorage.getItem("starlight-theme") === null) {
+      try {
+        localStorage.setItem("starlight-theme", "dark");
+      } catch (e) {}
+    }
+    const storedTheme = hasLS && localStorage.getItem("starlight-theme");
+    const theme = storedTheme || "dark";
+    document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+    return {
+      updatePickers(theme = storedTheme || "auto") {
+        document.querySelectorAll("starlight-theme-select").forEach((picker) => {
+          const select = picker.querySelector("select");
+          if (select) select.value = theme;
+          /** @type {HTMLTemplateElement | null} */
+          const tmpl = document.querySelector(`#theme-icons`);
+          const newIcon = tmpl && tmpl.content.querySelector("." + theme);
+          if (newIcon) {
+            const oldIcon = picker.querySelector("svg.label-icon");
+            if (oldIcon) {
+              oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+            }
+          }
+        });
+      },
+    };
+  })();
+</script>
+
+<template id="theme-icons">
+  <Icon name="sun" class="light" />
+  <Icon name="moon" class="dark" />
+  <Icon name="laptop" class="auto" />
+</template>

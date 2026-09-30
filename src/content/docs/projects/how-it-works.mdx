@@ -1,0 +1,53 @@
+---
+title: How the scan works
+description: How this site builds a mosaic of every GitHub repository before each deploy.
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+This portfolio is **self-updating**. There is no hand-maintained list of projects —
+a script scans GitHub and regenerates the data every time the site builds.
+
+## The pipeline
+
+<Steps>
+
+1. **`prebuild` hook.** `package.json` runs `bun run scripts/scan-repos.ts` immediately
+   before `astro build` (and before `astro dev`), so the data is always fresh.
+
+2. **List repositories.** The script calls the GitHub REST API for every public repo,
+   falling back to the authenticated `gh` CLI when direct `fetch` is unavailable
+   (e.g. behind a strict proxy). Forks and the profile repo itself are filtered out
+   by default.
+
+3. **Collect social images.** For each repo it fetches the GitHub OpenGraph card from
+   `opengraph.githubassets.com` and saves it under `public/og/`. If the host is
+   unreachable at build time, it records the remote URL instead so the browser can
+   load it directly.
+
+4. **Write the dataset.** Normalized metadata (name, description, language, stars,
+   topics, timestamps, image path) is written to `src/data/repos.json`.
+
+5. **Render the mosaic.** Astro imports that JSON at build time and the
+   `RepoMosaic` component renders it with WebCoreUI components, styled with UnoCSS.
+
+</Steps>
+
+## Configuration
+
+The scan is controlled by environment variables:
+
+| Variable        | Default        | Purpose                                        |
+| --------------- | -------------- | ---------------------------------------------- |
+| `GITHUB_USER`   | `archont561`   | Which GitHub login to scan.                    |
+| `GITHUB_TOKEN`  | _(unset)_      | Raises API rate limits; provided by CI.        |
+| `INCLUDE_FORKS` | `false`        | Set to `true` to include forked repositories.  |
+| `INCLUDE_SELF`  | `false`        | Set to `true` to include the profile repo.     |
+
+## Tech stack
+
+- **Runtime / package manager:** Bun
+- **Framework:** Astro + Starlight
+- **Components:** WebCoreUI (`Badge`, `AspectRatio`, `Ribbon`)
+- **Styling:** UnoCSS (WebCoreUI's `--w-*` tokens are pre-compiled to plain CSS)
+- **Deploy:** GitHub Actions → GitHub Pages
