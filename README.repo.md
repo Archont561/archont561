@@ -57,6 +57,7 @@ The `prebuild` npm lifecycle hook runs the scanner **before** Astro builds, so `
 | UI Components | [WebCoreUI](https://webcoreui.dev) (`Badge`, `AspectRatio`, `Ribbon`) |
 | Styling | [UnoCSS](https://unocss.dev) (WebCoreUI tokens pre-compiled to plain CSS) |
 | Data source | GitHub REST API (`fetch`, with `gh` CLI fallback) |
+| Planning | [Backlog.md](https://github.com/MrLesk/Backlog.md) task files in `backlog/tasks/` |
 | CI / Hosting | GitHub Actions → GitHub Pages |
 
 ---
@@ -76,9 +77,13 @@ bun run preview   # preview the production build locally
 Handy scripts:
 
 ```bash
-bun run scan      # re-scan GitHub repos → src/data/repos.json
-bun run tokens    # regenerate WebCoreUI design tokens (after upgrading webcoreui)
-bun run shots     # capture desktop page screenshots to ./screenshots
+bun run scan             # re-scan GitHub repos → src/data/repos.json
+bun run env:restore      # restore .env from .env.example without overwriting an existing file
+bun run knowledge:check  # validate .knowledge frontmatter, links and dependencies
+bun run backlog:board    # show the Backlog.md task board
+bun run backlog:check    # check Backlog.md task IDs and dependencies
+bun run tokens           # regenerate WebCoreUI design tokens (after upgrading webcoreui)
+bun run shots            # capture desktop page screenshots to ./screenshots
 ```
 
 ---
@@ -99,6 +104,9 @@ bun run shots     # capture desktop page screenshots to ./screenshots
 ```text
 .
 ├── .agents/skills/       # Agent skills and development workflows
+├── .knowledge/           # Durable project context, contracts and decisions
+├── backlog/              # Backlog.md-managed task files
+├── backlog.config.yml    # Backlog.md project configuration
 ├── .github/workflows/
 │   └── deploy.yml        # GitHub Pages build & deploy workflow
 ├── public/
