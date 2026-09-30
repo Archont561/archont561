@@ -1,0 +1,50 @@
+---
+title: archont561
+description: Portfolio of @archont561 — GIS, geospatial tooling, Rust & Python. A live mosaic of every public GitHub repository, generated at deploy time.
+template: splash
+hero:
+  tagline: GIS &amp; geospatial engineering — QGIS plugins, terrain tooling, and systems in Rust &amp; Python. This site rebuilds a mosaic of every public repo each time it deploys.
+  image:
+    file: ../../assets/hero.png
+    alt: A stylized topographic mosaic of map tiles
+  actions:
+    - text: Explore the mosaic
+      link: projects/mosaic/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/archont561
+      icon: external
+      variant: minimal
+---
+
+import RepoMosaic from "../../components/RepoMosaic.astro";
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## Latest work
+
+A snapshot of my most notable repositories — every tile is the repo's live GitHub
+social preview, collected automatically by the build. Hover a tile for details.
+
+<RepoMosaic limit={6} filters={false} />
+
+<p style="text-align:center;margin-top:1.5rem">
+  <a href="projects/mosaic/"><strong>See all repositories →</strong></a>
+</p>
+
+## What I build
+
+<CardGrid stagger>
+  <Card title="Geospatial tooling" icon="magnifier">
+    QGIS plugins, terrain and DTM processing, spatial analysis workflows.
+  </Card>
+  <Card title="Systems in Rust" icon="rocket">
+    Fast, reliable command-line and query tooling for geodata.
+  </Card>
+  <Card title="Python data pipelines" icon="seti:python">
+    Automation for GIS datasets, mileage calculations, and hazard mapping.
+  </Card>
+  <Card title="Self-updating site" icon="setting">
+    This portfolio re-scans GitHub and rebuilds the mosaic on every deploy.
+  </Card>
+</CardGrid>

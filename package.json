@@ -1,0 +1,39 @@
+{
+  "name": "archont561-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Astro + Starlight portfolio for @archont561, with a build-time mosaic of GitHub repositories.",
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "scripts": {
+    "scan": "bun run scripts/scan-repos.ts",
+    "tokens": "bun run scripts/gen-tokens.ts",
+    "prebuild": "bun run scripts/scan-repos.ts",
+    "predev": "bun run scripts/scan-repos.ts",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "shots": "bun run scripts/screenshots.mjs",
+    "skills": "skills",
+    "skills:restore": "skills experimental_install"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.4",
+    "astro": "^7.3.5",
+    "sass": "^1.105.1",
+    "sharp": "^0.34.4",
+    "webcoreui": "^1.5.0"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^153.0.0",
+    "@unocss/astro": "^66.10.5",
+    "@unocss/preset-wind4": "^66.10.5",
+    "puppeteer-core": "^25.12.0",
+    "skills": "^1.7.0",
+    "unocss": "^66.10.5"
+  }
+}

@@ -1,0 +1,33 @@
+/* Auto-generated WebCoreUI design tokens (compiled from its Sass theme once).
+   Do not edit by hand. Regenerate with: bun run tokens */
+body {
+  --w-sm-radius: 2px;
+  --w-md-radius: 5px;
+  --w-lg-radius: 10px;
+  --w-xl-radius: 15px;
+}
+
+:root {
+  --w-color-scheme: dark;
+  --w-color-primary: hsl(0, 0%, 97%);
+  --w-color-primary-10: hsl(0, 0%, 82%);
+  --w-color-primary-20: hsl(0, 0%, 69%);
+  --w-color-primary-30: hsl(0, 0%, 48%);
+  --w-color-primary-40: hsl(0, 0%, 28%);
+  --w-color-primary-50: hsl(0, 0%, 18%);
+  --w-color-primary-60: hsl(0, 0%, 8%);
+  --w-color-primary-70: hsl(0, 0%, 4%);
+  --w-color-info: hsl(192, 80%, 50%);
+  --w-color-info-accent: hsl(192, 100%, 60%);
+  --w-color-info-fg: hsl(0, 0%, 0%);
+  --w-color-success: hsl(162, 60%, 42%);
+  --w-color-success-accent: hsl(162, 62%, 48%);
+  --w-color-success-fg: hsl(0, 0%, 0%);
+  --w-color-warning: hsl(30, 100%, 63%);
+  --w-color-warning-accent: hsl(32, 100%, 68%);
+  --w-color-warning-fg: hsl(0, 0%, 0%);
+  --w-color-alert: hsl(0, 68%, 52%);
+  --w-color-alert-accent: hsl(0, 80%, 62%);
+  --w-color-alert-fg: hsl(0, 0%, 100%);
+  --w-color-overlay: hsla(0, 0%, 0%, 0.62);
+}
